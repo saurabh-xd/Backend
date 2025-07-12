@@ -1,5 +1,6 @@
 import mongoose, {Schema} from "mongoose";
-import { JsonWebTokenError } from "jsonwebtoken";
+import pkg from 'jsonwebtoken';
+const { JsonWebTokenError } = pkg;
 import bcrypt from "bcrypt"
 
 const userSchema = new Schema(
@@ -26,11 +27,11 @@ const userSchema = new Schema(
             index: true         
         },
         avatar: {
-            type: string, //cloudnary url
+            type: String, //cloudnary url
             required: true,
         },
         coverImage: {
-            type: string, //cloudnary url
+            type: String, //cloudnary url
         },
         watchHistory: [
             {
@@ -43,7 +44,7 @@ const userSchema = new Schema(
             required: [true, 'password is required']
         },
         refreshToken: {
-            type: string
+            type: String
         }
         
 
@@ -56,7 +57,7 @@ const userSchema = new Schema(
 userSchema.pre("save", async function (next) {
     if(!this.isModified("password")) return next();
 
-    this.pasword = bcrypt.hash(this.pasword, 10)
+    this.pasword = await bcrypt.hash(this.pasword, 10)
     next()
 })
 
