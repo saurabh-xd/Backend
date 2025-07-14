@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { DB_NAME } from "../constants.js";
 
+//Database connect
 const connectDB = async () => {
     try {
       
@@ -12,6 +13,8 @@ const connectDB = async () => {
         process.exit(1)
         
     }
+  
+    
 }
 
 export default connectDB
