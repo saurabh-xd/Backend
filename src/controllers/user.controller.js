@@ -4,7 +4,7 @@ import {User} from "../models/user.model.js";
 import { uploadCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 
-const registerUser = asyncHandler( async(req,res) => {
+
     //get user details from frontend 
     //validation - not empty
     //check if user already exists: username , email
@@ -13,8 +13,10 @@ const registerUser = asyncHandler( async(req,res) => {
     //create user objectc- create entry db
     //remove password and refresh token field from response
     //check for user creation
-    //return res
+    //return res  
 
+const registerUser = asyncHandler( async(req,res) => {       
+                         
     const {fullname, email, username, password} = req.body
     console.log("email", email);
 
@@ -53,7 +55,7 @@ const registerUser = asyncHandler( async(req,res) => {
     coverImage: coverImage?.url || "",
     email,
     password,
-    username: username.toLowerCase
+    username: username.toLowerCase()
    })
 
  const createdUser = await User.findById(user._id).select(
